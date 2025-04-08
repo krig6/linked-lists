@@ -90,4 +90,18 @@ class LinkedList {
     previousNode.nextNode = null;
     return `Removed ${currentNode.value}`;
   }
+
+  // Returns true if the passed in value is in the list and otherwise returns false
+  contains(value) {
+    if (this.head === null) return false;
+
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
+        return true;
+      }
+      currentNode = currentNode.nextNode;
+    }
+    return false;
+  }
 }
