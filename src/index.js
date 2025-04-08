@@ -4,3 +4,10 @@ class Node {
     this.nextNode = null;
   }
 }
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.size = 0;
+  }
+}
