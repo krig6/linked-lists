@@ -117,4 +117,34 @@ class LinkedList {
     }
     return null;
   }
+
+  // Represents your LinkedList objects as strings, so you can prin them out and preview them in the console
+  // Format : ( value ) -> ( value ) -> null
+  toString() {
+    if (this.head === null) return null;
+    let string = '';
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      string += `( ${currentNode.value} ) -> `;
+      currentNode = currentNode.nextNode;
+    }
+    string += 'null';
+    return string;
+  }
 }
+
+const link = new LinkedList();
+link.append(5);
+link.prepend(3);
+link.append(7);
+console.log(link.printSize());
+console.log(link.printHead());
+console.log(link.printTail());
+console.log(link.contains(4)); //should return false
+console.log(link.contains(3)); //should return true
+console.log(link.contains(5)); //should return true
+console.log(link.contains(10)); //should return false
+console.log(link.find(3)); // should return 0;
+console.log(link.find(7)); // should return 2;
+console.log(link.find(9)); // should return null
+console.log(link.toString()); // should return 3 5 7 null
