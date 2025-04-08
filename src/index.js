@@ -48,4 +48,17 @@ class LinkedList {
   printHead() {
     return this.head;
   }
+
+  // Returns the last node in the list
+  printTail() {
+    if (this.head === null) {
+      return null;
+    } else {
+      let currentNode = this.head;
+      while (currentNode.nextNode !== null) {
+        currentNode = currentNode.nextNode;
+      }
+      return currentNode;
+    }
+  }
 }
