@@ -1,203 +1,54 @@
-class Node {
-  constructor(value) {
-    this.value = value;
-    this.nextNode = null;
-  }
-}
+// Import the LinkedList class
+import LinkedList from './classes/LinkedList.js';
 
-class LinkedList {
-  constructor() {
-    this.head = null;
-    this.size = 0;
-  }
+// Create a new LinkedList
+const list = new LinkedList();
 
-  // Adds a new node containing value to the end of the list
-  append(value) {
-    const newNode = new Node(value);
-    if (this.head === null) {
-      this.head = newNode;
-    } else {
-      let currentNode = this.head;
-      while (currentNode.nextNode !== null) {
-        currentNode = currentNode.nextNode;
-      }
-      currentNode.nextNode = newNode;
-    }
-    this.size++;
-  }
+// append() method
+console.log('Appending 10 to the list...');
+list.append(10);
+console.log(list.toString()); // Expected: ( 10 ) -> null
 
-  // Adds a new node containing value to the start of the list
-  prepend(value) {
-    const newNode = new Node(value);
-    if (this.head === null) {
-      this.head = newNode;
-    } else {
-      let currentNode = this.head;
-      newNode.nextNode = currentNode;
-      this.head = newNode;
-    }
-    this.size++;
-  }
+console.log('Appending 20 to the list...');
+list.append(20);
+console.log(list.toString()); // Expected: ( 10 ) -> ( 20 ) -> null
 
-  // Returns the total number of nodes in the list
-  printSize() {
-    return this.size;
-  }
+// prepend() method
+console.log('Prepending 5 to the list...');
+list.prepend(5);
+console.log(list.toString()); // Expected: ( 5 ) -> ( 10 ) -> ( 20 ) -> null
 
-  // Returns the first node in the list
-  printHead() {
-    return this.head;
-  }
+// printSize() method
+console.log('Size of the list:', list.printSize()); // Expected: 3
 
-  // Returns the last node in the list
-  printTail() {
-    if (this.head === null) {
-      return null;
-    } else {
-      let currentNode = this.head;
-      while (currentNode.nextNode !== null) {
-        currentNode = currentNode.nextNode;
-      }
-      return currentNode;
-    }
-  }
+// printHead() method
+console.log('Head of the list:', list.printHead()); // Expected: Node { value: 5, nextNode: Node { value: 10, nextNode: [Node] } }
 
-  // Returns the node at the given index
-  at(index) {
-    let count = 0;
-    if (index < 0 || index >= this.size) return 'Invalid index.';
-    if (this.head === null) {
-      return null;
-    } else {
-      let currentNode = this.head;
-      while (count !== index) {
-        currentNode = currentNode.nextNode;
-        count++;
-      }
-      return currentNode;
-    }
-  }
+// printTail() method
+console.log('Tail of the list:', list.printTail()); // Expected: Node { value: 20, nextNode: null }
 
-  // Removes the last node from the list
-  pop() {
-    if (this.head === null) return 'List is empty.';
+// insertAt() method (Insert at index 1)
+console.log('Inserting 15 at index 1...');
+list.insertAt(15, 1);
+console.log(list.toString()); // Expected: ( 5 ) -> ( 15 ) -> ( 10 ) -> ( 20 ) -> null
 
-    if (this.head.nextNode === null) {
-      const removedValue = this.head.value;
-      this.head = null;
-      this.size--;
-      return `Removed ${removedValue}`;
-    }
+// removeAt() method (Remove at index 2)
+console.log('Removing node at index 2...');
+list.removeAt(2);
+console.log(list.toString()); // Expected: ( 5 ) -> ( 15 ) -> ( 20 ) -> null
 
-    let currentNode = this.head;
-    let previousNode = null;
+// pop() method (Remove the last node)
+console.log('Popping the last node...');
+list.pop();
+console.log(list.toString()); // Expected: ( 5 ) -> ( 15 ) -> null
 
-    while (currentNode.nextNode !== null) {
-      previousNode = currentNode;
-      currentNode = currentNode.nextNode;
-    }
+// contains() method (Check if the list contains a value)
+console.log('Does the list contain 15?', list.contains(15)); // Expected: true
+console.log('Does the list contain 10?', list.contains(10)); // Expected: false
 
-    previousNode.nextNode = null;
-    this.size--;
-    return `Removed ${currentNode.value}`;
-  }
+// find() method (Find the index of a value)
+console.log('Index of 15 in the list:', list.find(15)); // Expected: 1
+console.log('Index of 10 in the list:', list.find(10)); // Expected: null
 
-  // Returns true if the passed in value is in the list and otherwise returns false
-  contains(value) {
-    if (this.head === null) return false;
-
-    let currentNode = this.head;
-    while (currentNode !== null) {
-      if (currentNode.value === value) {
-        return true;
-      }
-      currentNode = currentNode.nextNode;
-    }
-    return false;
-  }
-
-  // Returns the index of the node containing value, or null if not found
-  find(value) {
-    if (this.head === null) return null;
-    let currentNode = this.head;
-    for (let i = 0; i < this.size; i++) {
-      if (currentNode.value === value) {
-        return i;
-      }
-      currentNode = currentNode.nextNode;
-    }
-    return null;
-  }
-
-  // Represents your LinkedList objects as strings, so you can prin them out and preview them in the console
-  // Format : ( value ) -> ( value ) -> null
-  toString() {
-    if (this.head === null) return null;
-    let string = '';
-    let currentNode = this.head;
-    while (currentNode !== null) {
-      string += `( ${currentNode.value} ) -> `;
-      currentNode = currentNode.nextNode;
-    }
-    string += 'null';
-    return string;
-  }
-
-  // Inserts a new node with the provided value at the given index
-  insertAt(value, index) {
-    if (index < 0 || index > this.size) return 'Invalid index.';
-
-    if (this.head === null && index === 0) {
-      return this.append(value);
-    }
-
-    if (index === 0) {
-      this.prepend(value);
-    } else {
-      const newNode = new Node(value);
-      let currentNode = this.head;
-      let previousNode = null;
-      let count = 0;
-      while (count !== index) {
-        previousNode = currentNode;
-        currentNode = currentNode.nextNode;
-        count++;
-      }
-      previousNode.nextNode = newNode;
-      newNode.nextNode = currentNode;
-      this.size++;
-    }
-    return this.head;
-  }
-
-  // Removed node at the given index
-  removeAt(index) {
-    if (index < 0 || index >= this.size) return 'Invalid index.';
-    if (this.size === 0) return 'List is empty.';
-
-    if (index === 0) {
-      let removedNode = this.head;
-      if (this.size === 1) {
-        this.head = null;
-      } else {
-        this.head = this.head.nextNode;
-      }
-      this.size--;
-      return removedNode.value;
-    }
-
-    let currentNode = this.head;
-    let previousNode = null;
-    let count = 0;
-
-    while (count !== index) {
-      previousNode = currentNode;
-      currentNode = currentNode.nextNode;
-      count++;
-    }
-
-    previousNode.nextNode = currentNode.nextNode;
-    this.size--;
-    return currentNode.value;
-  }
-}
+// toString() method
+console.log('String representation of the list:', list.toString()); // Expected: ( 5 ) -> ( 15 ) -> null
