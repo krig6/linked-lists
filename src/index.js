@@ -104,4 +104,17 @@ class LinkedList {
     }
     return false;
   }
+
+  // Returns the index of the node containing value, or null if not found
+  find(value) {
+    if (this.head === null) return null;
+    let currentNode = this.head;
+    for (let i = 0; i < this.size; i++) {
+      if (currentNode.value === value) {
+        return i;
+      }
+      currentNode = currentNode.nextNode;
+    }
+    return null;
+  }
 }
