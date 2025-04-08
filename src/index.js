@@ -43,4 +43,9 @@ class LinkedList {
   printSize() {
     return this.size;
   }
+
+  // Returns the first node in the list
+  printHead() {
+    return this.head;
+  }
 }
