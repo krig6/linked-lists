@@ -77,4 +77,17 @@ class LinkedList {
       return currentNode;
     }
   }
+
+  // Removes the last node from the list
+  pop() {
+    if (this.head === null) return 'List is empty.';
+    let currentNode = this.head;
+    let previousNode = currentNode;
+    while (currentNode.nextNode !== null) {
+      previousNode = currentNode;
+      currentNode = currentNode.nextNode;
+    }
+    previousNode.nextNode = null;
+    return `Removed ${currentNode.value}`;
+  }
 }
