@@ -131,20 +131,31 @@ class LinkedList {
     string += 'null';
     return string;
   }
-}
 
-const link = new LinkedList();
-link.append(5);
-link.prepend(3);
-link.append(7);
-console.log(link.printSize());
-console.log(link.printHead());
-console.log(link.printTail());
-console.log(link.contains(4)); //should return false
-console.log(link.contains(3)); //should return true
-console.log(link.contains(5)); //should return true
-console.log(link.contains(10)); //should return false
-console.log(link.find(3)); // should return 0;
-console.log(link.find(7)); // should return 2;
-console.log(link.find(9)); // should return null
-console.log(link.toString()); // should return 3 5 7 null
+  // Inserts a new node with the provided value at the given index
+  insertAt(value, index) {
+    if (index < 0 || index > this.size) return 'Invalid index.';
+
+    if (this.head === null && index === 0) {
+      return this.append(value);
+    }
+
+    if (index === 0) {
+      this.prepend(value);
+    } else {
+      const newNode = new Node(value);
+      let currentNode = this.head;
+      let previousNode = currentNode;
+      let count = 0;
+      while (count !== index) {
+        previousNode = currentNode;
+        currentNode = currentNode.nextNode;
+        count++;
+      }
+      previousNode.nextNode = newNode;
+      newNode.nextNode = currentNode;
+      this.size++;
+    }
+    return this.head;
+  }
+}
