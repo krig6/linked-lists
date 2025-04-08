@@ -81,13 +81,24 @@ class LinkedList {
   // Removes the last node from the list
   pop() {
     if (this.head === null) return 'List is empty.';
+
+    if (this.head.nextNode === null) {
+      const removedValue = this.head.value;
+      this.head = null;
+      this.size--;
+      return `Removed ${removedValue}`;
+    }
+
     let currentNode = this.head;
-    let previousNode = currentNode;
+    let previousNode = null;
+
     while (currentNode.nextNode !== null) {
       previousNode = currentNode;
       currentNode = currentNode.nextNode;
     }
+
     previousNode.nextNode = null;
+    this.size--;
     return `Removed ${currentNode.value}`;
   }
 
@@ -145,7 +156,7 @@ class LinkedList {
     } else {
       const newNode = new Node(value);
       let currentNode = this.head;
-      let previousNode = currentNode;
+      let previousNode = null;
       let count = 0;
       while (count !== index) {
         previousNode = currentNode;
@@ -157,5 +168,36 @@ class LinkedList {
       this.size++;
     }
     return this.head;
+  }
+
+  // Removed node at the given index
+  removeAt(index) {
+    if (index < 0 || index >= this.size) return 'Invalid index.';
+    if (this.size === 0) return 'List is empty.';
+
+    if (index === 0) {
+      let removedNode = this.head;
+      if (this.size === 1) {
+        this.head = null;
+      } else {
+        this.head = this.head.nextNode;
+      }
+      this.size--;
+      return removedNode.value;
+    }
+
+    let currentNode = this.head;
+    let previousNode = null;
+    let count = 0;
+
+    while (count !== index) {
+      previousNode = currentNode;
+      currentNode = currentNode.nextNode;
+      count++;
+    }
+
+    previousNode.nextNode = currentNode.nextNode;
+    this.size--;
+    return currentNode.value;
   }
 }
