@@ -35,7 +35,7 @@ export const plugins = [
   new HTMLWebpackPlugin({
     filename: 'index.html',
     template: 'src/template.html',
-    title: '',
+    title: 'Project: Linked Lists',
     favicon: ''
   })
 ];

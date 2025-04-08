@@ -1,7 +1,7 @@
 {
-  "name": "my-webpack-template",
+  "name": "linked-lists",
   "version": "1.0.0",
-  "description": "Welcome to the Webpack Template! 🎉 This template provides a solid foundation for starting a modern JavaScript project with Webpack, including development and production setups.",
+  "description": "A linked list is a linear collection of data elements called nodes that “point” to the next node by means of a pointer.",
   "type": "module",
   "main": "index.js",
   "scripts": {
