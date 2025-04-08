@@ -38,4 +38,9 @@ class LinkedList {
     }
     this.size++;
   }
+
+  // Returns the total number of nodes in the list
+  printSize() {
+    return this.size;
+  }
 }
