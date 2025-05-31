@@ -195,6 +195,28 @@ class LinkedList {
     this.size--;
     return currentNode.value;
   }
+
+  _validateValue(value) {
+    if (value === undefined || value === null) {
+      throw new Error("Value cannot be null or undefined.")
+    }
+
+    if (typeof value === 'number') return value
+
+    if (typeof value === 'string') {
+      let trimmedValue = value.trim()
+      if (trimmedValue === "") {
+        throw new Error("Value cannot be empty.")
+      }
+      const numeric = Number(trimmedValue)
+      if (isNaN(numeric)) {
+        throw new Error("Value must be a valid number.")
+      }
+      return numeric
+    }
+    throw new Error("Value must be a number or a string.")
+  }
+
 }
 
 export default LinkedList;
