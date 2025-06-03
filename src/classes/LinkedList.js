@@ -28,7 +28,6 @@ class LinkedList {
     return newNode
   }
 
-
   // Adds a new node containing value to the start of the list
   prepend(value) {
     const validatedValue = this._validateValue(value)
@@ -67,18 +66,19 @@ class LinkedList {
 
   // Returns the node at the given index
   at(index) {
-    let count = 0;
-    if (index < 0 || index >= this.size) return 'Invalid index.';
-    if (this.head === null) {
-      return null;
-    } else {
-      let currentNode = this.head;
-      while (count !== index) {
-        currentNode = currentNode.nextNode;
-        count++;
-      }
-      return currentNode;
+    const validatedIndex = this._validateValue(index)
+
+    if (validatedIndex < 0 || validatedIndex >= this.size) {
+      throw new Error("Out of bounds.")
     }
+
+    let currentNode = this.head;
+
+    for (let i = 0; i < validatedIndex; i++) {
+      currentNode = currentNode.nextNode;
+    }
+
+    return currentNode;
   }
 
   // Removes the last node from the list
