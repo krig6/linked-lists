@@ -3,35 +3,51 @@ import Node from './Node.js';
 class LinkedList {
   constructor() {
     this.head = null;
+    this.tail = null;
     this.size = 0;
   }
 
   // Adds a new node containing value to the end of the list
   append(value) {
-    const newNode = new Node(value);
+    const validatedValue = this._validateValue(value)
+    const newNode = new Node(validatedValue);
+
+    if (this.contains(validatedValue)) {
+      throw new Error("That is a duplicate!")
+    }
+
     if (this.head === null) {
       this.head = newNode;
+      this.tail = this.head
     } else {
-      let currentNode = this.head;
-      while (currentNode.nextNode !== null) {
-        currentNode = currentNode.nextNode;
-      }
-      currentNode.nextNode = newNode;
+      this.tail.nextNode = newNode
+      this.tail = newNode
     }
+
     this.size++;
+    return newNode
   }
+
 
   // Adds a new node containing value to the start of the list
   prepend(value) {
-    const newNode = new Node(value);
-    if (this.head === null) {
-      this.head = newNode;
-    } else {
-      let currentNode = this.head;
-      newNode.nextNode = currentNode;
-      this.head = newNode;
+    const validatedValue = this._validateValue(value)
+    const newNode = new Node(validatedValue);
+
+    if (this.contains(validatedValue)) {
+      throw new Error("That is a duplicate!")
     }
-    this.size++;
+
+    if (this.head === null) {
+      this.head = newNode
+      this.tail = this.head
+    } else {
+      newNode.nextNode = this.head
+      this.head = newNode
+    }
+
+    this.size++
+    return newNode
   }
 
   // Returns the total number of nodes in the list
