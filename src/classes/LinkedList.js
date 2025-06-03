@@ -111,15 +111,18 @@ class LinkedList {
 
   // Returns true if the passed in value is in the list and otherwise returns false
   contains(value) {
+    const validatedValue = this._validateValue(value);
+
     if (this.head === null) return false;
 
     let currentNode = this.head;
     while (currentNode !== null) {
-      if (currentNode.value === value) {
+      if (currentNode.value === validatedValue) {
         return true;
       }
       currentNode = currentNode.nextNode;
     }
+
     return false;
   }
 
