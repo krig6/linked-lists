@@ -128,14 +128,19 @@ class LinkedList {
 
   // Returns the index of the node containing value, or null if not found
   find(value) {
+    const validatedValue = this._validateValue(value);
+
     if (this.head === null) return null;
+
     let currentNode = this.head;
-    for (let i = 0; i < this.size; i++) {
-      if (currentNode.value === value) {
+
+    for (let i = 0; currentNode !== null; i++) {
+      if (currentNode.value === validatedValue) {
         return i;
       }
       currentNode = currentNode.nextNode;
     }
+
     return null;
   }
 
