@@ -83,26 +83,30 @@ class LinkedList {
 
   // Removes the last node from the list
   pop() {
-    if (this.head === null) return 'List is empty.';
+    if (this.head === null) {
+      throw new Error("List is empty.");
+    }
 
-    if (this.head.nextNode === null) {
-      const removedValue = this.head.value;
+    let oldTail;
+
+    if (this.size === 1) {
+      oldTail = this.head
       this.head = null;
-      this.size--;
-      return `Removed ${removedValue}`;
+      this.tail = null;
+    } else {
+      let currentNode = this.head;
+
+      while (currentNode.nextNode !== this.tail) {
+        currentNode = currentNode.nextNode;
+      }
+
+      oldTail = this.tail;
+      currentNode.nextNode = null;
+      this.tail = currentNode;
     }
 
-    let currentNode = this.head;
-    let previousNode = null;
-
-    while (currentNode.nextNode !== null) {
-      previousNode = currentNode;
-      currentNode = currentNode.nextNode;
-    }
-
-    previousNode.nextNode = null;
     this.size--;
-    return `Removed ${currentNode.value}`;
+    return `Removed ${oldTail.value}`;
   }
 
   // Returns true if the passed in value is in the list and otherwise returns false
