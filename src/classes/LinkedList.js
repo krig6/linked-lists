@@ -193,33 +193,32 @@ class LinkedList {
 
   // Removed node at the given index
   removeAt(index) {
-    if (index < 0 || index >= this.size) return 'Invalid index.';
-    if (this.size === 0) return 'List is empty.';
+    const validatedIndex = this._validateValue(index);
+    let removedNode;
 
-    if (index === 0) {
-      let removedNode = this.head;
-      if (this.size === 1) {
-        this.head = null;
-      } else {
-        this.head = this.head.nextNode;
-      }
+    if (this.size === 0) {
+      throw new Error("List is empty.")
+    }
+
+    if (validatedIndex < 0 || validatedIndex >= this.size) {
+      throw new Error("Out of bounds.")
+    }
+
+    if (validatedIndex === this.size - 1) {
+      return this.pop()
+    } else if (validatedIndex === 0) {
+      removedNode = this.head;
+      this.head = removedNode.nextNode;
       this.size--;
-      return removedNode.value;
+      if (this.size === 0) this.tail = null;
+    } else {
+      removedNode = this.at(validatedIndex);
+      let previousNode = this.at(validatedIndex - 1);
+      previousNode.nextNode = removedNode.nextNode;
+      this.size--;
     }
 
-    let currentNode = this.head;
-    let previousNode = null;
-    let count = 0;
-
-    while (count !== index) {
-      previousNode = currentNode;
-      currentNode = currentNode.nextNode;
-      count++;
-    }
-
-    previousNode.nextNode = currentNode.nextNode;
-    this.size--;
-    return currentNode.value;
+    return `Removed ${removedNode.value}`
   }
 
   _validateValue(value) {
