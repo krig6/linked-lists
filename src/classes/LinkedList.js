@@ -51,26 +51,18 @@ class LinkedList {
   }
 
   // Returns the total number of nodes in the list
-  printSize() {
+  getSize() {
     return this.size;
   }
 
   // Returns the first node in the list
-  printHead() {
+  getHead() {
     return this.head;
   }
 
   // Returns the last node in the list
-  printTail() {
-    if (this.head === null) {
-      return null;
-    } else {
-      let currentNode = this.head;
-      while (currentNode.nextNode !== null) {
-        currentNode = currentNode.nextNode;
-      }
-      return currentNode;
-    }
+  getTail() {
+    return this.tail;
   }
 
   // Returns the node at the given index

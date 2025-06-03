@@ -18,14 +18,14 @@ console.log('Prepending 5 to the list...');
 list.prepend(5);
 console.log(list.toString()); // Expected: ( 5 ) -> ( 10 ) -> ( 20 ) -> null
 
-// printSize() method
-console.log('Size of the list:', list.printSize()); // Expected: 3
+// getSize() method
+console.log('Size of the list:', list.getSize()); // Expected: 3
 
-// printHead() method
-console.log('Head of the list:', list.printHead()); // Expected: Node { value: 5, nextNode: Node { value: 10, nextNode: [Node] } }
+// getHead() method
+console.log('Head of the list:', list.getHead()); // Expected: Node { value: 5, nextNode: Node { value: 10, nextNode: [Node] } }
 
-// printTail() method
-console.log('Tail of the list:', list.printTail()); // Expected: Node { value: 20, nextNode: null }
+// getTail() method
+console.log('Tail of the list:', list.getTail()); // Expected: Node { value: 20, nextNode: null }
 
 // insertAt() method (Insert at index 1)
 console.log('Inserting 15 at index 1...');
