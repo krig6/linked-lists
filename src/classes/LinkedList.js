@@ -147,15 +147,19 @@ class LinkedList {
   // Represents your LinkedList objects as strings, so you can prin them out and preview them in the console
   // Format : ( value ) -> ( value ) -> null
   toString() {
-    if (this.head === null) return null;
-    let string = '';
+    if (this.head === null) return 'null';
+
+    let nodes = []
     let currentNode = this.head;
+
     while (currentNode !== null) {
-      string += `( ${currentNode.value} ) -> `;
+      nodes.push(`(${currentNode.value})`)
+      // string += `( ${currentNode.value} ) -> `;
       currentNode = currentNode.nextNode;
     }
-    string += 'null';
-    return string;
+    nodes.push("null")
+
+    return nodes.join(" -> ")
   }
 
   // Inserts a new node with the provided value at the given index
