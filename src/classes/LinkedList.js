@@ -164,28 +164,30 @@ class LinkedList {
 
   // Inserts a new node with the provided value at the given index
   insertAt(value, index) {
-    if (index < 0 || index > this.size) return 'Invalid index.';
+    const validatedValue = this._validateValue(value);
+    const validatedIndex = this._validateValue(index);
 
-    if (this.head === null && index === 0) {
-      return this.append(value);
+    if (validatedIndex < 0 || validatedIndex > this.size) {
+      throw new Error("Out of bounds.")
     }
 
-    if (index === 0) {
-      this.prepend(value);
+    if (this.contains(validatedValue)) {
+      throw new Error("That is a duplicate.")
+    }
+
+    if (validatedIndex === this.size) {
+      return this.append(validatedValue);
+    } else if (validatedIndex === 0) {
+      return this.prepend(validatedValue)
     } else {
-      const newNode = new Node(value);
-      let currentNode = this.head;
-      let previousNode = null;
-      let count = 0;
-      while (count !== index) {
-        previousNode = currentNode;
-        currentNode = currentNode.nextNode;
-        count++;
-      }
+      // Insert newNode between previousNode and its nextNode
+      let previousNode = this.at(validatedIndex - 1);
+      let newNode = new Node(validatedValue);
+      newNode.nextNode = previousNode.nextNode;
       previousNode.nextNode = newNode;
-      newNode.nextNode = currentNode;
       this.size++;
     }
+
     return this.head;
   }
 
